@@ -1,0 +1,111 @@
+@model ATMMonitoringSystem.Models.ATM
+
+@{
+    ViewBag.Title = "Add New ATM";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-header text-white d-flex align-items-center" style="background: linear-gradient(to right, #0d6efd, #6610f2);">
+                    <i class="bi bi-bank2 fs-4 me-2"></i>
+                    <h4 class="mb-0">🧾 Register New ATM</h4>
+                </div>
+
+                <div class="card-body p-4 bg-light-subtle">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row g-4">
+                            <!-- ATM Location -->
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    @Html.TextBoxFor(model => model.Location, new { @class = "form-control border-primary", placeholder = "ATM Location" })
+                                    @Html.LabelFor(model => model.Location)
+                                    @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger small" })
+                                </div>
+                            </div>
+
+                            <!-- City / District -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    @Html.TextBox("CityDistrict", null, new { @class = "form-control border-info", placeholder = "City or District" })
+                                    <label for="CityDistrict">🏙️ City / District</label>
+                                </div>
+                            </div>
+
+                            <!-- Contact Person -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    @Html.TextBox("ContactPerson", null, new { @class = "form-control border-warning", placeholder = "Contact Person Name" })
+                                    <label for="ContactPerson">👤 Contact Person</label>
+                                </div>
+                            </div>
+
+                            <!-- ATM Status -->
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    @Html.DropDownListFor(model => model.Status,
+                                         new SelectList(new[] { "Active", "Under Maintenance", "Offline" }),
+                                         "Select Status",
+                                         new { @class = "form-select border-success" })
+                                    @Html.LabelFor(model => model.Status)
+                                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger small" })
+                                </div>
+                            </div>
+
+                            <!-- Last Maintenance Date -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    @Html.TextBoxFor(model => model.LastMaintenanceDate, "{0:yyyy-MM-dd}", new { @class = "form-control border-secondary", type = "date", placeholder = "Last Maintenance Date" })
+                                    @Html.LabelFor(model => model.LastMaintenanceDate)
+                                    @Html.ValidationMessageFor(model => model.LastMaintenanceDate, "", new { @class = "text-danger small" })
+                                </div>
+                            </div>
+
+                            <!-- Notes -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    @Html.TextAreaFor(model => model.Notes, new { @class = "form-control border-info", style = "height: 100px;", placeholder = "Notes" })
+                                    @Html.LabelFor(model => model.Notes)
+                                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger small" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="submit" class="btn btn-gradient btn-lg text-white px-4">
+                                <i class="bi bi-check-circle me-2"></i> Submit
+                            </button>
+                            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-outline-danger btn-lg" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<style>
+    .btn-gradient {
+        background: linear-gradient(to right, #198754, #20c997);
+        border: none;
+    }
+
+        .btn-gradient:hover {
+            background: linear-gradient(to right, #157347, #0dcaf0);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            transform: scale(1.02);
+        }
+
+    .bg-light-subtle {
+        background-color: #f8f9fa;
+    }
+</style>

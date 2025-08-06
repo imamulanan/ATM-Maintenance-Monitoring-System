@@ -1,0 +1,44 @@
+﻿@model ATMMonitoringSystem.Models.ATM
+
+@{
+    ViewBag.Title = "ATM Details";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white rounded-top-4 d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">🏧 ATM Details</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold">📍 Location:</div>
+                        <div class="col-sm-8">@Html.DisplayFor(model => model.Location)</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold">⚙️ Status:</div>
+                        <div class="col-sm-8">@Html.DisplayFor(model => model.Status)</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold">🛠️ Last Maintenance:</div>
+                        <div class="col-sm-8">@Html.DisplayFor(model => model.LastMaintenanceDate)</div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold">📝 Notes:</div>
+                        <div class="col-sm-8">@Html.DisplayFor(model => model.Notes)</div>
+                    </div>
+                </div>
+
+                <div class="card-footer d-flex justify-content-between">
+                    @Html.ActionLink("✏️ Edit", "Edit", new { id = Model.ATMId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("🔙 Back to List", "Index", null, new { @class = "btn btn-outline-secondary" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

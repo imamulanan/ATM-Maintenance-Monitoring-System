@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ATMMonitoringSystem.Models.ATM>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Last Maintenance</th>
+            <th>Notes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Location</td>
+                <td>@item.Status</td>
+                <td>@item.LastMaintenanceDate.ToShortDateString()</td>
+                <td>@item.Notes</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ATMId }, new { @class = "btn btn-warning btn-sm" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ATMId }, new { @class = "btn btn-danger btn-sm" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ATMId }, new { @class = "btn btn-info btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

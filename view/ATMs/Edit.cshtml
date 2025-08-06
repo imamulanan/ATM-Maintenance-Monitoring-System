@@ -1,0 +1,63 @@
+﻿@model ATMMonitoringSystem.Models.ATM
+
+@{
+    ViewBag.Title = "Edit ATM";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-info text-white rounded-top-4">
+                    <h4 class="mb-0">🛠️ Edit ATM Details</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.HiddenFor(model => model.ATMId)
+
+                        <div class="form-floating mb-4">
+                            @Html.TextBoxFor(model => model.Location, new { @class = "form-control", placeholder = "ATM Location" })
+                            @Html.LabelFor(model => model.Location)
+                            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            @Html.TextBoxFor(model => model.Status, new { @class = "form-control", placeholder = "ATM Status" })
+                            @Html.LabelFor(model => model.Status)
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            @Html.TextBoxFor(model => model.LastMaintenanceDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", placeholder = "Last Maintenance Date" })
+                            @Html.LabelFor(model => model.LastMaintenanceDate)
+                            @Html.ValidationMessageFor(model => model.LastMaintenanceDate, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", placeholder = "Additional Notes", style = "height: 100px;" })
+                            @Html.LabelFor(model => model.Notes)
+                            @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-info btn-lg px-4">
+                                <i class="bi bi-save2 me-1"></i> Save Changes
+                            </button>
+                            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-secondary btn-lg" })
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
